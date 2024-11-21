@@ -4,10 +4,11 @@ export default class extends BaseSchema {
   protected tableName = 'addresses';
 
   async up() {
+    this.schema.dropTableIfExists(this.tableName);
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary();
 
-      table.integer('client_id').notNullable().references('id').inTable('clients').onDelete('CASCADE');
+      table.integer('client_id').notNullable().unsigned().references('id').inTable('clients').onDelete('CASCADE');
 
       table.string('road').notNullable();
 
@@ -25,8 +26,8 @@ export default class extends BaseSchema {
 
       table.string('zip_code').notNullable();
 
-      table.timestamp('created_at').defaultTo(new Date());
-      table.timestamp('updated_at').defaultTo(new Date());
+      table.timestamp('created_at', { useTz: true }).defaultTo(this.now());
+      table.timestamp('updated_at', { useTz: true }).defaultTo(this.now());
     });
   }
 

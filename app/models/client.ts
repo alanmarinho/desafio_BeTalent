@@ -6,6 +6,9 @@ export default class Client extends BaseModel {
   declare id: number;
 
   @column()
+  declare user_id: number
+
+  @column()
   declare name: string;
 
   @column()

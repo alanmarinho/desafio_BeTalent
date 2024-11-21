@@ -6,7 +6,7 @@ export default class Address extends BaseModel {
   declare id: number;
 
   @column()
-  declare client_id: string;
+  declare client_id: number;
 
   @column()
   declare road: string;
