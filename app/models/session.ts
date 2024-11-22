@@ -15,5 +15,5 @@ export default class Session extends BaseModel {
   declare created_at: DateTime;
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updated_t: DateTime;
+  declare updated_at: DateTime;
 }

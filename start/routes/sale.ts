@@ -1,3 +1,4 @@
+import { middleware } from '#start/kernel';
 import router from '@adonisjs/core/services/router';
 
 router
@@ -13,4 +14,5 @@ router
       return JSON.stringify({ msg: 'new', data: data });
     });
   })
-  .prefix('/sale');
+  .prefix('/sale')
+  .use(middleware.auth());

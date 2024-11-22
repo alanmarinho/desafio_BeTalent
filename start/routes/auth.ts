@@ -1,13 +1,9 @@
+import { middleware } from '#start/kernel';
 import router from '@adonisjs/core/services/router';
+const AuthController = () => import('#controllers/http/auth_controller');
 
 router.group(() => {
-  router.post('/login', async () => {
-    return JSON.stringify({ authToken: 'fwrf3ffqwfwcv' });
-  });
-  router.post('/signup', async () => {
-    return JSON.stringify({ msg: 'signup' });
-  });
-  router.post('/logout', async () => {
-    return JSON.stringify({ msg: 'logout' });
-  });
+  router.post('/login', [AuthController, 'login']);
+  router.post('/signup', [AuthController, 'signup']);
+  router.post('/logout', [AuthController, 'logout']).use(middleware.auth());
 });

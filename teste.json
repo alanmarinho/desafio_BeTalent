@@ -1,0 +1,376 @@
+{
+  parsedUrl: Url {
+    protocol: null,
+    slashes: null,
+    auth: null,
+    host: null,
+    port: null,
+    hostname: null,
+    hash: null,
+    search: null,
+    query: null,
+    pathname: '/login',
+    path: '/login',
+    href: '/login'
+  },
+  ctx: <ref *2> HttpContext {
+    route: {
+      meta: [Object
+      ],
+      pattern: '/login',
+      handler: [Object
+      ],
+      middleware: Middleware {},
+      name: undefined,
+      execute: [Function: execute
+      ]
+    },
+    routeKey: 'POST-/login',
+    params: {},
+    subdomains: {},
+    request: [Circular *1
+    ],
+    response: Response {
+      lazyBody: {},
+      ctx: [Circular *2
+      ],
+      request: [IncomingMessage
+      ],
+      response: [ServerResponse
+      ]
+    },
+    logger: _Logger { pino: [EventEmitter
+      ], config: [Object
+      ]
+    },
+    containerResolver: ContainerResolver {}
+  },
+  request: IncomingMessage {
+    _events: {
+      close: undefined,
+      error: undefined,
+      data: undefined,
+      end: undefined,
+      readable: undefined
+    },
+    _readableState: ReadableState {
+      highWaterMark: 16384,
+      buffer: [Array
+      ],
+      bufferIndex: 0,
+      length: 51,
+      pipes: [],
+      awaitDrainWriters: null,
+      [Symbol(kState)
+      ]: 1315596
+    },
+    _maxListeners: undefined,
+    socket: Socket {
+      connecting: false,
+      _hadError: false,
+      _parent: null,
+      _host: null,
+      _closeAfterHandlingError: false,
+      _events: [Object
+      ],
+      _readableState: [ReadableState
+      ],
+      _writableState: [WritableState
+      ],
+      allowHalfOpen: true,
+      _maxListeners: undefined,
+      _eventsCount: 8,
+      _sockname: null,
+      _pendingData: null,
+      _pendingEncoding: '',
+      server: [Server
+      ],
+      _server: [Server
+      ],
+      parser: [HTTPParser
+      ],
+      on: [Function: socketListenerWrap
+      ],
+      addListener: [Function: socketListenerWrap
+      ],
+      prependListener: [Function: socketListenerWrap
+      ],
+      setEncoding: [Function: socketSetEncoding
+      ],
+      _paused: false,
+      _httpMessage: [ServerResponse
+      ],
+      [Symbol(async_id_symbol)
+      ]: 2565,
+      [Symbol(kHandle)
+      ]: [TCP
+      ],
+      [Symbol(lastWriteQueueSize)
+      ]: 0,
+      [Symbol(timeout)
+      ]: null,
+      [Symbol(kBuffer)
+      ]: null,
+      [Symbol(kBufferCb)
+      ]: null,
+      [Symbol(kBufferGen)
+      ]: null,
+      [Symbol(shapeMode)
+      ]: true,
+      [Symbol(kCapture)
+      ]: false,
+      [Symbol(kSetNoDelay)
+      ]: true,
+      [Symbol(kSetKeepAlive)
+      ]: false,
+      [Symbol(kSetKeepAliveInitialDelay)
+      ]: 0,
+      [Symbol(kBytesRead)
+      ]: 0,
+      [Symbol(kBytesWritten)
+      ]: 0
+    },
+    httpVersionMajor: 1,
+    httpVersionMinor: 1,
+    httpVersion: '1.1',
+    complete: true,
+    rawHeaders: [
+      'Host',
+      'localhost: 3333',
+      'Content-Type',
+      'application/json',
+      'User-Agent',
+      'insomnia/10.1.1',
+      'Accept',
+      '* /*',
+      'Content-Length',
+      '51'
+    ],
+    rawTrailers: [],
+    joinDuplicateHeaders: null,
+    aborted: false,
+    upgrade: false,
+    url: '/login',
+    method: 'POST',
+    statusCode: null,
+    statusMessage: null,
+    client: Socket {
+      connecting: false,
+      _hadError: false,
+      _parent: null,
+      _host: null,
+      _closeAfterHandlingError: false,
+      _events: [Object],
+      _readableState: [ReadableState],
+      _writableState: [WritableState],
+      allowHalfOpen: true,
+      _maxListeners: undefined,
+      _eventsCount: 8,
+      _sockname: null,
+      _pendingData: null,
+      _pendingEncoding: '',
+      server: [Server],
+      _server: [Server],
+      parser: [HTTPParser],
+      on: [Function: socketListenerWrap],
+      addListener: [Function: socketListenerWrap],
+      prependListener: [Function: socketListenerWrap],
+      setEncoding: [Function: socketSetEncoding],
+      _paused: false,
+      _httpMessage: [ServerResponse],
+      [Symbol(async_id_symbol)]: 2565,
+      [Symbol(kHandle)]: [TCP],
+      [Symbol(lastWriteQueueSize)]: 0,
+      [Symbol(timeout)]: null,
+      [Symbol(kBuffer)]: null,
+      [Symbol(kBufferCb)]: null,
+      [Symbol(kBufferGen)]: null,
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false,
+      [Symbol(kSetNoDelay)]: true,
+      [Symbol(kSetKeepAlive)]: false,
+      [Symbol(kSetKeepAliveInitialDelay)]: 0,
+      [Symbol(kBytesRead)]: 0,
+      [Symbol(kBytesWritten)]: 0
+    },
+    _consuming: false,
+    _dumped: false,
+    [Symbol(shapeMode)]: true,
+    [Symbol(kCapture)]: false,
+    [Symbol(kHeaders)]: {
+      host: 'localhost:3333',
+      'content-type': 'application/json',
+      'user-agent': 'insomnia/10.1.1',
+      accept: '*/*',
+      'content-length': '51',
+      'x-request-id': 'gfsfkhsee91tp2q749eq08ei'
+    },
+    [Symbol(kHeadersCount)
+    ]: 10,
+    [Symbol(kTrailers)
+    ]: null,
+    [Symbol(kTrailersCount)
+    ]: 0
+  },
+  response: <ref *3> ServerResponse {
+    _events: [Object: null prototype
+    ] { finish: [Function: bound resOnFinish
+      ]
+    },
+    _eventsCount: 1,
+    _maxListeners: undefined,
+    outputData: [],
+    outputSize: 0,
+    writable: true,
+    destroyed: false,
+    _last: false,
+    chunkedEncoding: false,
+    shouldKeepAlive: true,
+    maxRequestsOnConnectionReached: false,
+    _defaultKeepAlive: true,
+    useChunkedEncodingByDefault: true,
+    sendDate: true,
+    _removedConnection: false,
+    _removedContLen: false,
+    _removedTE: false,
+    strictContentLength: false,
+    _contentLength: null,
+    _hasBody: true,
+    _trailer: '',
+    finished: false,
+    _headerSent: false,
+    _closed: false,
+    socket: Socket {
+      connecting: false,
+      _hadError: false,
+      _parent: null,
+      _host: null,
+      _closeAfterHandlingError: false,
+      _events: [Object
+      ],
+      _readableState: [ReadableState
+      ],
+      _writableState: [WritableState
+      ],
+      allowHalfOpen: true,
+      _maxListeners: undefined,
+      _eventsCount: 8,
+      _sockname: null,
+      _pendingData: null,
+      _pendingEncoding: '',
+      server: [Server
+      ],
+      _server: [Server
+      ],
+      parser: [HTTPParser
+      ],
+      on: [Function: socketListenerWrap
+      ],
+      addListener: [Function: socketListenerWrap
+      ],
+      prependListener: [Function: socketListenerWrap
+      ],
+      setEncoding: [Function: socketSetEncoding
+      ],
+      _paused: false,
+      _httpMessage: [Circular *3
+      ],
+      [Symbol(async_id_symbol)
+      ]: 2565,
+      [Symbol(kHandle)
+      ]: [TCP
+      ],
+      [Symbol(lastWriteQueueSize)
+      ]: 0,
+      [Symbol(timeout)
+      ]: null,
+      [Symbol(kBuffer)
+      ]: null,
+      [Symbol(kBufferCb)
+      ]: null,
+      [Symbol(kBufferGen)
+      ]: null,
+      [Symbol(shapeMode)
+      ]: true,
+      [Symbol(kCapture)
+      ]: false,
+      [Symbol(kSetNoDelay)
+      ]: true,
+      [Symbol(kSetKeepAlive)
+      ]: false,
+      [Symbol(kSetKeepAliveInitialDelay)
+      ]: 0,
+      [Symbol(kBytesRead)
+      ]: 0,
+      [Symbol(kBytesWritten)
+      ]: 0
+    },
+    _header: null,
+    _keepAliveTimeout: 5000,
+    _onPendingData: [Function: bound updateOutgoingData
+    ],
+    req: IncomingMessage {
+      _events: [Object
+      ],
+      _readableState: [ReadableState
+      ],
+      _maxListeners: undefined,
+      socket: [Socket
+      ],
+      httpVersionMajor: 1,
+      httpVersionMinor: 1,
+      httpVersion: '1.1',
+      complete: true,
+      rawHeaders: [Array
+      ],
+      rawTrailers: [],
+      joinDuplicateHeaders: null,
+      aborted: false,
+      upgrade: false,
+      url: '/login',
+      method: 'POST',
+      statusCode: null,
+      statusMessage: null,
+      client: [Socket
+      ],
+      _consuming: false,
+      _dumped: false,
+      [Symbol(shapeMode)
+      ]: true,
+      [Symbol(kCapture)
+      ]: false,
+      [Symbol(kHeaders)
+      ]: [Object
+      ],
+      [Symbol(kHeadersCount)
+      ]: 10,
+      [Symbol(kTrailers)
+      ]: null,
+      [Symbol(kTrailersCount)
+      ]: 0
+    },
+    _sent100: false,
+    _expect_continue: false,
+    _maxRequestsPerSocket: 0,
+    [Symbol(shapeMode)
+    ]: false,
+    [Symbol(kCapture)
+    ]: false,
+    [Symbol(kBytesWritten)
+    ]: 0,
+    [Symbol(kNeedDrain)
+    ]: false,
+    [Symbol(corked)
+    ]: 0,
+    [Symbol(kOutHeaders)
+    ]: null,
+    [Symbol(errored)
+    ]: null,
+    [Symbol(kHighWaterMark)
+    ]: 16384,
+    [Symbol(kRejectNonStandardBodyWrites)
+    ]: false,
+    [Symbol(kUniqueHeaders)
+    ]: null
+  }
+}

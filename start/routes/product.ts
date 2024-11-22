@@ -1,3 +1,4 @@
+import { middleware } from '#start/kernel';
 import router from '@adonisjs/core/services/router';
 
 router
@@ -20,4 +21,5 @@ router
       return JSON.stringify({ msg: `softDelet ${params.id}` });
     });
   })
-  .prefix('/product');
+  .prefix('/product')
+  .use(middleware.auth());
