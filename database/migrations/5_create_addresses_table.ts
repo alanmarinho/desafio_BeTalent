@@ -26,8 +26,8 @@ export default class extends BaseSchema {
 
       table.string('zip_code').notNullable();
 
-      table.timestamp('created_at', { useTz: true }).defaultTo(this.now());
-      table.timestamp('updated_at', { useTz: true }).defaultTo(this.now());
+      table.dateTime('created_at', { useTz: true }).defaultTo(this.now());
+      table.dateTime('updated_at', { useTz: true }).defaultTo(this.now());
     });
   }
 

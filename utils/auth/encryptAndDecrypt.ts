@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+
 interface IEncrypt {
   data: string;
   key: string;

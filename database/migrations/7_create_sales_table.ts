@@ -14,10 +14,10 @@ export default class extends BaseSchema {
       table.integer('quantity').unsigned().notNullable();
       table.float('total_price', 10, 2).notNullable().checkPositive();
       table.float('unit_price', 10, 2).notNullable().checkPositive();
-      table.timestamp('sale_date').notNullable();
+      table.dateTime('sale_date').notNullable();
 
-      table.timestamp('created_at', { useTz: true }).defaultTo(this.now());
-      table.timestamp('updated_at', { useTz: true }).defaultTo(this.now());
+      table.dateTime('created_at', { useTz: true }).defaultTo(this.now());
+      table.dateTime('updated_at', { useTz: true }).defaultTo(this.now());
     });
   }
 

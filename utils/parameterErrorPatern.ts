@@ -1,14 +1,14 @@
 export interface ValidationErrorItem {
   message: string;
-  field: string;
+  parameter: string;
+  field?: string;
 }
-
-export function FieldError(errors: ValidationErrorItem[]) {
+export function ParameterError(errors: ValidationErrorItem[]) {
   const formattedErrors: ValidationErrorItem[] = [];
 
   errors.forEach((error) => {
     formattedErrors.push({
-      field: error.field,
+      parameter: error.field as string,
       message: error.message,
     });
   });

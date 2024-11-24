@@ -55,6 +55,7 @@
     "@adonisjs/lucid": "^21.4.0",
     "@types/jsonwebtoken": "^9.0.7",
     "@vinejs/vine": "^2.1.0",
+    "cpf-cnpj-validator": "^1.0.3",
     "crypto": "^1.0.1",
     "jsonwebtoken": "^9.0.2",
     "luxon": "^3.5.0",

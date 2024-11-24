@@ -8,12 +8,14 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary();
 
-      table.integer('user_id').notNullable().unsigned().references('id').inTable('clients').onDelete('CASCADE');
+      table.integer('user_id').notNullable().unsigned().references('id').inTable('users').onDelete('CASCADE');
       table.string('name').notNullable();
-      table.string('CPF').notNullable().unique();
+      table.string('CPF').notNullable();
 
-      table.timestamp('created_at', { useTz: true }).defaultTo(this.now());
-      table.timestamp('updated_at', { useTz: true }).defaultTo(this.now());
+      table.dateTime('created_at', { useTz: true }).defaultTo(this.now());
+      table.dateTime('updated_at', { useTz: true }).defaultTo(this.now());
+
+      table.unique(['CPF', 'user_id']); // um user não pode cadrastrar o mesmo cpf mais de um vez, mas um cpf pode ser cadrastrado por mais de um user
     });
   }
 

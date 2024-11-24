@@ -12,9 +12,10 @@ export default class extends BaseSchema {
       table.string('name').notNullable();
       table.text('description');
       table.float('unit_price', 10, 2).notNullable().checkPositive();
+      table.dateTime('deleted_in').nullable().defaultTo(null);
 
-      table.timestamp('created_at', { useTz: true }).defaultTo(this.now());
-      table.timestamp('updated_at', { useTz: true }).defaultTo(this.now());
+      table.dateTime('created_at', { useTz: true }).defaultTo(this.now());
+      table.dateTime('updated_at', { useTz: true }).defaultTo(this.now());
     });
   }
 

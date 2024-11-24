@@ -1,18 +1,14 @@
-import { middleware } from '#start/kernel';
 import router from '@adonisjs/core/services/router';
+
+import { middleware } from '#start/kernel';
+
+const SaleController = () => import('#controllers/http/sale_controller');
 
 router
   .group(() => {
-    router.get('/', async () => {
-      return JSON.stringify({ msg: 'listAll' });
-    });
-    router.get('/show/:id', ({ params, request }) => {
-      return JSON.stringify({ msg: `details params ${params.id}, ${request.header('Authorization')}` });
-    });
-    router.post('/store', ({ request }) => {
-      const data = request.body();
-      return JSON.stringify({ msg: 'new', data: data });
-    });
+    router.get('/', [SaleController, 'index']);
+    router.get('/show/:id', [SaleController, 'show']);
+    router.post('/store', [SaleController, 'store']);
   })
   .prefix('/sale')
   .use(middleware.auth());

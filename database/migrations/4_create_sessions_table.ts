@@ -11,8 +11,8 @@ export default class extends BaseSchema {
       table.integer('user_id').notNullable().unsigned().references('id').inTable('users').onDelete('CASCADE');
       table.string('token_key').notNullable();
 
-      table.timestamp('created_at', { useTz: true }).defaultTo(this.now());
-      table.timestamp('updated_at', { useTz: true }).defaultTo(this.now());
+      table.dateTime('created_at', { useTz: true }).defaultTo(this.now());
+      table.dateTime('updated_at', { useTz: true }).defaultTo(this.now());
     });
   }
 

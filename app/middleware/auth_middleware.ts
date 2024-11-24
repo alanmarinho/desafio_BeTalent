@@ -1,13 +1,17 @@
+import type { NextFn } from '@adonisjs/core/types/http';
+import type { HttpContext } from '@adonisjs/core/http';
+
 import Session from '#models/session';
+
+import jwt from 'jsonwebtoken';
+
 import { decrypt } from '#utils/auth/encryptAndDecrypt';
 import { ValidateJWT } from '#utils/auth/validateJWT';
 import { ErrorReturn } from '#utils/errorReturn';
 import { IJwtPayload } from '#utils/interfaces/interfaces';
-import type { HttpContext } from '@adonisjs/core/http';
-import type { NextFn } from '@adonisjs/core/types/http';
-import jwt from 'jsonwebtoken';
 
 import env from '#start/env';
+import { RemoveSession } from '#utils/auth/removeSession';
 const APP_KEY = env.get('APP_KEY');
 
 export default class AuthMiddleware {
@@ -39,13 +43,13 @@ export default class AuthMiddleware {
       const decriptedJwtKey = decrypt({ data: userSession.token_key, key: APP_KEY });
 
       const [payload, status] = await ValidateJWT({ jwt: token, key: decriptedJwtKey });
-
       switch (status) {
         case 'Valid':
           ctx.authPayload = payload as IJwtPayload;
           await next();
           break;
         case 'Expired':
+          await RemoveSession({ session_id: tokenPayload.session_id });
           return ErrorReturn({
             res: ctx.response,
             msg: 'Expired token ',
@@ -54,6 +58,7 @@ export default class AuthMiddleware {
           });
 
         case 'Invalid':
+          await RemoveSession({ session_id: tokenPayload.session_id });
           return ErrorReturn({
             res: ctx.response,
             msg: 'Invalid token',
@@ -62,6 +67,7 @@ export default class AuthMiddleware {
           });
 
         default:
+          await RemoveSession({ session_id: tokenPayload.session_id });
           return ErrorReturn({
             res: ctx.response,
             msg: 'Token validation error',
@@ -70,7 +76,6 @@ export default class AuthMiddleware {
           });
       }
     } catch (err) {
-      console.log('err', err);
       return ErrorReturn({
         res: ctx.response,
         msg: 'Internal server error',

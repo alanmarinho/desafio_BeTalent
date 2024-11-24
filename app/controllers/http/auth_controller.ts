@@ -1,18 +1,22 @@
 import type { HttpContext } from '@adonisjs/core/http';
+import hash from '@adonisjs/core/services/hash';
+
+import { errors } from '@vinejs/vine';
+import jwt from 'jsonwebtoken';
+
 import { signupValidator, loginValidator } from '#validators/auth';
+
+import User from '#models/user';
+import Session from '#models/session';
+
 import { ErrorReturn } from '#utils/errorReturn';
 import { SuccessReturn } from '#utils/successReturn';
-import User from '#models/user';
 import { FieldError } from '#utils/fieldErrorPatern';
-import { errors } from '@vinejs/vine';
 import { keyGenerator } from '#utils/auth/authKeyGenerator';
-
-import hash from '@adonisjs/core/services/hash';
-import jwt from 'jsonwebtoken';
 import { encrypt } from '#utils/auth/encryptAndDecrypt';
-import env from '#start/env';
-import Session from '#models/session';
 import { RemoveSession } from '#utils/auth/removeSession';
+
+import env from '#start/env';
 
 const APP_KEY = env.get('APP_KEY');
 
@@ -108,16 +112,21 @@ export default class AuthController {
         });
       }
 
-      const newUserData = {
+      const newUserPayload = {
         name: data.name,
         email: data.email,
         password: await hash.make(data.password),
       };
 
-      const newUser = await User.create(newUserData);
+      const newUser = await User.create(newUserPayload);
+
+      const newuserResponse = {
+        id: newUser.id,
+        name: newUser.name,
+      };
 
       if (!!newUser) {
-        return SuccessReturn({ status: 201, msg: 'Success create user', res: response });
+        return SuccessReturn({ status: 201, msg: 'Success create user', res: response, data: newuserResponse });
       } else {
         return ErrorReturn({ status: 500, msg: 'Create user error', res: response });
       }

@@ -1,4 +1,5 @@
 import JWT from 'jsonwebtoken';
+
 import { IJwtPayload } from '#utils/interfaces/interfaces';
 
 enum EJwtReturn {

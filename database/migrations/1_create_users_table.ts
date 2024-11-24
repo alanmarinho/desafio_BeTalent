@@ -12,8 +12,8 @@ export default class extends BaseSchema {
       table.string('name').notNullable();
       table.string('password').notNullable();
 
-      table.timestamp('created_at').defaultTo(this.now());
-      table.timestamp('updated_at').defaultTo(this.now());
+      table.dateTime('created_at').defaultTo(this.now());
+      table.dateTime('updated_at').defaultTo(this.now());
     });
   }
 
