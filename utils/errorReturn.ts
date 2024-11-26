@@ -11,8 +11,7 @@ export interface IFieldError {
 }
 
 interface IErrorActions {
-  refresh?: boolean;
-  logout?: boolean;
+  remove_token?: boolean;
 }
 
 interface IErrorReturn {

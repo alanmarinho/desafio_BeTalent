@@ -16,19 +16,21 @@ import { ParameterError } from '#utils/parameterErrorPatern';
 
 interface IIndexSale {
   id: number;
+  total_price: number;
   product_id: number;
   created_at: Date;
 }
+const isoRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+\-]\d{2}:\d{2})$/;
 
 export default class SaleController {
   public async index({ response, authPayload }: HttpContext) {
     try {
       if (!authPayload) {
-        return ErrorReturn({ res: response, status: 401, msg: 'Not authenticated', actions: { logout: true } });
+        return ErrorReturn({ res: response, status: 401, msg: 'Not authenticated', actions: { remove_token: true } });
       }
       const existingSales = await Sale.query()
         .where({ user_id: authPayload.user_id })
-        .orderBy('sale_date', 'asc')
+        .orderBy('sale_date', 'desc')
         .whereHas('product', (builder) => {
           builder.whereNull('deleted_in');
         });
@@ -40,6 +42,7 @@ export default class SaleController {
       sales.map((sale) => {
         returnData.push({
           id: sale.id,
+          total_price: sale.total_price,
           product_id: sale.product_id,
           created_at: sale.created_at,
         });
@@ -58,7 +61,7 @@ export default class SaleController {
   public async show({ response, params, authPayload }: HttpContext) {
     try {
       if (!authPayload) {
-        return ErrorReturn({ res: response, status: 401, msg: 'Not authenticated', actions: { logout: true } });
+        return ErrorReturn({ res: response, status: 401, msg: 'Not authenticated', actions: { remove_token: true } });
       }
       const parameters = await showValidator.validate(params);
 
@@ -75,8 +78,8 @@ export default class SaleController {
         return ErrorReturn({
           res: response,
           status: 404,
-          msg: 'Product not found',
-          parameters: [{ parameter: 'id', message: 'Venda não encontrada' }],
+          msg: 'Sale not found',
+          parameters: [{ parameter: 'id', message: 'Sale not found' }],
         });
       }
 
@@ -90,12 +93,16 @@ export default class SaleController {
           id: existingSale.client.id,
           name: existingSale.client.name,
         },
-        created_at: existingSale.created_at,
+        quantity: existingSale.quantity,
+
+        unit_price: existingSale.unit_price,
+        total_price: existingSale.total_price,
+        sale_date: existingSale.sale_date,
       };
 
       return SuccessReturn({
         res: response,
-        msg: `Success get product id: ${existingSale.id}`,
+        msg: 'Success get product',
         status: 200,
         data: saleReturn,
       });
@@ -118,10 +125,19 @@ export default class SaleController {
   public async store({ response, request, authPayload }: HttpContext) {
     try {
       if (!authPayload) {
-        return ErrorReturn({ res: response, status: 401, msg: 'Not authenticated', actions: { logout: true } });
+        return ErrorReturn({ res: response, status: 401, msg: 'Not authenticated', actions: { remove_token: true } });
       }
 
       const data = await request.validateUsing(storeValidator);
+
+      if (data.quantity < 1) {
+        return ErrorReturn({
+          res: response,
+          msg: 'Not valid quantity',
+          status: 400,
+          fields: [{ field: 'quantity', message: 'Not valid quantity' }],
+        });
+      }
 
       const productExists = await Product.query()
         .where({ id: data.product_id, user_id: authPayload.user_id })

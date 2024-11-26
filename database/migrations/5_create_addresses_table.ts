@@ -9,6 +9,7 @@ export default class extends BaseSchema {
       table.increments('id').primary();
 
       table.integer('client_id').notNullable().unsigned().references('id').inTable('clients').onDelete('CASCADE');
+      table.integer('user_id').notNullable().unsigned().references('id').inTable('users').onDelete('CASCADE');
 
       table.string('road').notNullable();
 

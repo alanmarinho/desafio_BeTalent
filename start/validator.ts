@@ -16,8 +16,8 @@ vine.messagesProvider = new SimpleMessagesProvider({
   name: 'The value is not a valid name',
 
   //especial messages
-  'password.regex': 'Invalid password format, must contain numbers, letters and special characters',
+  'password.regex':
+    'Weak password. It must contain 6 characters long, numbers, lowercase and uppercase letters and special characters (!@#$%^&*?)',
   'name.regex': 'Invalid name format, must contain only letters and spaces',
-  'id.number': 'ID parameter must be a number',
-  'id.positive': 'ID parameter must be a positive number',
+  'sales_year.required': 'The sales_year parameter is required',
 });

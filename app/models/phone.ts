@@ -9,6 +9,9 @@ export default class Phone extends BaseModel {
   declare client_id: number;
 
   @column()
+  declare user_id: number;
+
+  @column()
   declare number: string;
 
   @column.dateTime({ autoCreate: true })

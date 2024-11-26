@@ -9,10 +9,13 @@ export default class extends BaseSchema {
       table.increments('id').primary();
 
       table.integer('client_id').notNullable().unsigned().references('id').inTable('clients').onDelete('CASCADE');
+      table.integer('user_id').notNullable().unsigned().references('id').inTable('users').onDelete('CASCADE');
       table.string('number').notNullable();
 
       table.dateTime('created_at', { useTz: true }).defaultTo(this.now());
       table.dateTime('updated_at', { useTz: true }).defaultTo(this.now());
+
+      table.unique(['number', 'user_id']);
     });
   }
 

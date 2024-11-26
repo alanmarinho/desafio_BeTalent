@@ -23,7 +23,7 @@ export default class ProductController {
   public async index({ response, authPayload }: HttpContext) {
     try {
       if (!authPayload) {
-        return ErrorReturn({ res: response, status: 401, msg: 'Not authenticated', actions: { logout: true } });
+        return ErrorReturn({ res: response, status: 401, msg: 'Not authenticated', actions: { remove_token: true } });
       }
       const existingProducts = await Product.query()
         .where({ user_id: authPayload.user_id })
@@ -54,7 +54,7 @@ export default class ProductController {
   public async show({ response, authPayload, params }: HttpContext) {
     try {
       if (!authPayload) {
-        return ErrorReturn({ res: response, status: 401, msg: 'Not authenticated', actions: { logout: true } });
+        return ErrorReturn({ res: response, status: 401, msg: 'Not authenticated', actions: { remove_token: true } });
       }
       const parameters = await showValidator.validate(params);
       const existingProduct = await Product.query()
@@ -74,6 +74,7 @@ export default class ProductController {
       const productReturn = {
         id: existingProduct.id,
         name: existingProduct.name,
+        unit_price: existingProduct.unit_price,
         description: existingProduct.description,
         created_at: existingProduct.created_at,
         updated_at: existingProduct.updated_at,
@@ -104,7 +105,7 @@ export default class ProductController {
   public async store({ response, request, authPayload }: HttpContext) {
     try {
       if (!authPayload) {
-        return ErrorReturn({ res: response, status: 401, msg: 'Not authenticated', actions: { logout: true } });
+        return ErrorReturn({ res: response, status: 401, msg: 'Not authenticated', actions: { remove_token: true } });
       }
 
       const data = await request.validateUsing(storeValidator);
@@ -137,7 +138,7 @@ export default class ProductController {
       if (err instanceof errors.E_VALIDATION_ERROR) {
         return ErrorReturn({
           res: response,
-          status: 401,
+          status: 400,
           msg: 'Validation Error',
           fields: FieldError(err.messages),
         });
@@ -152,7 +153,7 @@ export default class ProductController {
   public async update({ response, request, params, authPayload }: HttpContext) {
     try {
       if (!authPayload) {
-        return ErrorReturn({ res: response, status: 401, msg: 'Not authenticated', actions: { logout: true } });
+        return ErrorReturn({ res: response, status: 401, msg: 'Not authenticated', actions: { remove_token: true } });
       }
       const data = await request.validateUsing(updateValidator.updateValidatorBody);
       const parameters = await updateValidator.updateValidatorParameters.validate(params);
@@ -171,11 +172,26 @@ export default class ProductController {
         });
       }
 
-      existingProduct.merge(data);
+      const { deleted_in, ...updateProductData } = data;
+      if (deleted_in === false && typeof existingProduct.deleted_in != undefined) {
+        console.log('revet delet');
+        existingProduct.merge({ deleted_in: null });
+      }
+
+      if (deleted_in === true) {
+        return ErrorReturn({
+          msg: 'Not valid action',
+          status: 400,
+          res: response,
+          fields: [{ field: 'deleted_in', message: 'Not valid action' }],
+        });
+      }
+      existingProduct.merge(updateProductData);
       const savedProduct = await existingProduct.save();
 
       const updateProductReturn = {
         id: savedProduct.id,
+        ...updateProductData,
       };
 
       if (!!savedProduct) {
@@ -203,11 +219,11 @@ export default class ProductController {
   public async delete({ response, params, authPayload }: HttpContext) {
     try {
       if (!authPayload) {
-        return ErrorReturn({ res: response, status: 401, msg: 'Not authenticated', actions: { logout: true } });
+        return ErrorReturn({ res: response, status: 401, msg: 'Not authenticated', actions: { remove_token: true } });
       }
       const parameters = await deleteValidator.validate(params);
 
-      const existingProduct = await Product.findBy({ id: parameters.id });
+      const existingProduct = await Product.query().where({ id: parameters.id }).whereNull('deleted_in').first();
 
       if (!existingProduct) {
         return ErrorReturn({

@@ -150,14 +150,19 @@ export default class AuthController {
   public async logout({ response, authPayload }: HttpContext) {
     try {
       if (!authPayload) {
-        return ErrorReturn({ res: response, status: 401, msg: 'Not authenticated', actions: { logout: true } });
+        return ErrorReturn({ res: response, status: 401, msg: 'Not authenticated', actions: { remove_token: true } });
       }
 
       const success = await RemoveSession({ session_id: authPayload.session_id });
       if (success) {
         return SuccessReturn({ res: response, status: 200, msg: 'Success logout' });
       } else {
-        return ErrorReturn({ status: 500, msg: 'Remove session error', res: response, actions: { logout: true } });
+        return ErrorReturn({
+          status: 500,
+          msg: 'Remove session error',
+          res: response,
+          actions: { remove_token: true },
+        });
       }
     } catch (err) {
       return ErrorReturn({ res: response, msg: 'Internal server error', status: 500 });

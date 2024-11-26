@@ -1,5 +1,8 @@
 import { DateTime } from 'luxon';
-import { BaseModel, column } from '@adonisjs/lucid/orm';
+import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm';
+import type { BelongsTo } from '@adonisjs/lucid/types/relations';
+import User from './user.js';
+import Client from './client.js';
 
 export default class Address extends BaseModel {
   @column({ isPrimary: true })
@@ -7,6 +10,9 @@ export default class Address extends BaseModel {
 
   @column()
   declare client_id: number;
+
+  @column()
+  declare user_id: number;
 
   @column()
   declare road: string;
@@ -37,4 +43,10 @@ export default class Address extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updated_at: DateTime;
+
+  @belongsTo(() => User, { foreignKey: 'user_id' })
+  public user!: BelongsTo<typeof User>;
+
+  @belongsTo(() => Client, { foreignKey: 'client_id' })
+  public client!: BelongsTo<typeof Client>;
 }

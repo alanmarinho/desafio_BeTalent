@@ -1,5 +1,5 @@
-// usado especificamente para gerar cheve mestra APP_KEY
-// execute node tools/generate64bitkey.cjs, e copie a key para o .evc
+// usado especificamente para gerar chave mestra APP_KEY
+// execute node tools/generate64bitkey.cjs, e copie a key para o .env
 
 const crypto = require('crypto');
 

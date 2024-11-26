@@ -22,7 +22,7 @@ export default class Product extends BaseModel {
   declare description: string;
 
   @column.dateTime()
-  declare deleted_in: DateTime;
+  declare deleted_in: DateTime | null;
 
   @column.dateTime({ autoCreate: true })
   declare created_at: DateTime;

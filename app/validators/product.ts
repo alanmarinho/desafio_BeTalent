@@ -8,7 +8,7 @@ export const showValidator = vine.compile(
 
 export const storeValidator = vine.compile(
   vine.object({
-    name: vine.string().trim().maxLength(40),
+    name: vine.string().trim().maxLength(80),
     unit_price: vine.number().positive(),
     description: vine.string().trim().maxLength(600).optional(),
   }),
@@ -16,9 +16,10 @@ export const storeValidator = vine.compile(
 
 const updateValidatorBody = vine.compile(
   vine.object({
-    name: vine.string().trim().maxLength(40).optional(),
+    name: vine.string().trim().maxLength(80).optional(),
     unit_price: vine.number().positive().optional(),
     description: vine.string().trim().maxLength(600).optional(),
+    deleted_in: vine.boolean().optional(),
   }),
 );
 

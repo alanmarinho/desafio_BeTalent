@@ -1,5 +1,5 @@
 import vine from '@vinejs/vine';
-import { isISO8601Format } from '#validators/schema/customShemas';
+import { isValidDate } from '#validators/schema/customShemas';
 
 export const showValidator = vine.compile(
   vine.object({
@@ -12,6 +12,6 @@ export const storeValidator = vine.compile(
     client_id: vine.number().positive().withoutDecimals(),
     product_id: vine.number().positive().withoutDecimals(),
     quantity: vine.number().positive().withoutDecimals(),
-    sale_date: new isISO8601Format().dateRange({ min: 2000 }).optional(),
+    sale_date: new isValidDate({ min: 2000 }).optional(),
   }),
 );

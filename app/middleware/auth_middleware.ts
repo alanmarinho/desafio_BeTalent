@@ -24,7 +24,7 @@ export default class AuthMiddleware {
           res: ctx.response,
           msg: 'Token not send',
           status: 401,
-          actions: { logout: true },
+          actions: { remove_token: true },
         });
       }
       const tokenPayload = jwt.decode(token) as IJwtPayload;
@@ -36,7 +36,7 @@ export default class AuthMiddleware {
           res: ctx.response,
           status: 401,
           msg: 'Not authenticated',
-          actions: { logout: true },
+          actions: { remove_token: true },
         });
       }
 
@@ -54,7 +54,7 @@ export default class AuthMiddleware {
             res: ctx.response,
             msg: 'Expired token ',
             status: 401,
-            actions: { logout: true },
+            actions: { remove_token: true },
           });
 
         case 'Invalid':
@@ -63,7 +63,7 @@ export default class AuthMiddleware {
             res: ctx.response,
             msg: 'Invalid token',
             status: 401,
-            actions: { logout: true },
+            actions: { remove_token: true },
           });
 
         default:
@@ -72,7 +72,7 @@ export default class AuthMiddleware {
             res: ctx.response,
             msg: 'Token validation error',
             status: 500,
-            actions: { logout: true },
+            actions: { remove_token: true },
           });
       }
     } catch (err) {

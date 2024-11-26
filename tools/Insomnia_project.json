@@ -1,0 +1,651 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2024-11-26T17:46:44.172Z",
+  "__export_source": "insomnia.desktop.app:v10.1.1",
+  "resources": [
+    {
+      "_id": "req_8ee798db322e48579bfa2aad6e726300",
+      "parentId": "wrk_eec9584ef7ce498b8a8d3190fe7c5713",
+      "modified": 1732393473847,
+      "created": 1732218425477,
+      "url": "{{ _.baseUrl }}/logout",
+      "name": "logout",
+      "description": "",
+      "method": "POST",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/10.1.1"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.authToken }}"
+      },
+      "preRequestScript": "",
+      "metaSortKey": -1732218425477,
+      "isPrivate": false,
+      "pathParameters": [],
+      "afterResponseScript": "if(insomnia.response.code === 200){\n\tinsomnia.environment.set('authToken', '');\n}",
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_eec9584ef7ce498b8a8d3190fe7c5713",
+      "parentId": null,
+      "modified": 1732219836798,
+      "created": 1732213006019,
+      "name": "desafio BeTalent - Francisco Alan do Nascimento Marinho",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_937c5311c0cb4febb6baa040f3cb2787",
+      "parentId": "wrk_eec9584ef7ce498b8a8d3190fe7c5713",
+      "modified": 1732642160182,
+      "created": 1732216527301,
+      "url": "{{ _.baseUrl }}/login",
+      "name": "login",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"email\": \"user@email.com\",\n\t\"password\": \"str0ngP@ssw0rd\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/10.1.1"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1732216527301,
+      "isPrivate": false,
+      "pathParameters": [],
+      "afterResponseScript": "\nif(insomnia.response.code === 200){\n\tinsomnia.environment.set('authToken', '');\nlet body\nif(insomnia.response.json()){\n\tbody = insomnia.response.json()\n}\n\n\nif (body &&  body.data.authToken) {\n    const authToken = body.data.authToken;\n\n    insomnia.environment.set('authToken', authToken);\n}\n}",
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_21db87c3af3645b2a9ef761638029fd6",
+      "parentId": "wrk_eec9584ef7ce498b8a8d3190fe7c5713",
+      "modified": 1732641981661,
+      "created": 1732216566338,
+      "url": "{{ _.baseUrl }}/signup",
+      "name": "signup",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\t\"email\":\"user@email.com\",\n\t\t\"password\": \"str0ngP@ssw0rd\",\n\t\t\"name\":\"Tester User\"\n\t}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/10.1.1"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1732214881438,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_a4a189ae3a2c47178624628a5bd73c75",
+      "parentId": "fld_5fa0f0dd9c8a442c9ce9418c19e2b7ab",
+      "modified": 1732218001708,
+      "created": 1732213024148,
+      "url": "{{ _.baseUrl }}{{ _.product }}/",
+      "name": "getAll (index)",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/10.1.1"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.authToken }}"
+      },
+      "metaSortKey": -1732213235575,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_5fa0f0dd9c8a442c9ce9418c19e2b7ab",
+      "parentId": "wrk_eec9584ef7ce498b8a8d3190fe7c5713",
+      "modified": 1732213017354,
+      "created": 1732213017354,
+      "name": "products",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1732213017354,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_1eba54a85e5548bd8df057cf4e422e72",
+      "parentId": "fld_5fa0f0dd9c8a442c9ce9418c19e2b7ab",
+      "modified": 1732642193367,
+      "created": 1732215570609,
+      "url": "{{ _.baseUrl }}{{ _.product }}/show/1",
+      "name": "productDetails (show)",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/10.1.1"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.authToken }}"
+      },
+      "metaSortKey": -1730229873504,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_61c0045a3ddf4cd59e49bdb1f73bb3ad",
+      "parentId": "fld_5fa0f0dd9c8a442c9ce9418c19e2b7ab",
+      "modified": 1732642207585,
+      "created": 1732215803190,
+      "url": "{{ _.baseUrl }}{{ _.product }}/store",
+      "name": "newProduct (store)",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\t\"name\":\"água Cristal - garrafa 250ml\",\n\t\t\"unit_price\": 1.90,\n\t\t\"description\":\"água Cristal - garrafa 250ml\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/10.1.1"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.authToken }}"
+      },
+      "metaSortKey": -1729238192468.5,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_83e70ae1953b4c8388f59f17aa4b421d",
+      "parentId": "fld_5fa0f0dd9c8a442c9ce9418c19e2b7ab",
+      "modified": 1732642360107,
+      "created": 1732216016712,
+      "url": "{{ _.baseUrl }}{{ _.product }}/update/1",
+      "name": "updateProduct (update)",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"unit_price\": 2.15\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/10.1.1"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.authToken }}"
+      },
+      "metaSortKey": -1728742351950.75,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_eb3b0e54eea84f58957c30e5e1fb21dd",
+      "parentId": "fld_5fa0f0dd9c8a442c9ce9418c19e2b7ab",
+      "modified": 1732642289728,
+      "created": 1732218106307,
+      "url": "{{ _.baseUrl }}{{ _.product }}/delete/1",
+      "name": "softDeleteProduct (delete)",
+      "description": "",
+      "method": "PUT",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/10.1.1"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.authToken }}"
+      },
+      "metaSortKey": -1728494431691.875,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_3b38077495fd4a62a96c08c5c60bfeb9",
+      "parentId": "fld_fd42b62db2a949d0bf9ff70948ac4e59",
+      "modified": 1732483713586,
+      "created": 1732218142575,
+      "url": "{{ _.baseUrl }}{{ _.client }}/",
+      "name": "getAll (index)",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/10.1.1"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.authToken }}"
+      },
+      "metaSortKey": -1732213235575,
+      "isPrivate": false,
+      "pathParameters": [],
+      "afterResponseScript": "",
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_fd42b62db2a949d0bf9ff70948ac4e59",
+      "parentId": "wrk_eec9584ef7ce498b8a8d3190fe7c5713",
+      "modified": 1732406160505,
+      "created": 1732218142573,
+      "name": "clients",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1732213017304,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_5932ca61c0844e59b25520f525d8b9ee",
+      "parentId": "fld_fd42b62db2a949d0bf9ff70948ac4e59",
+      "modified": 1732642648240,
+      "created": 1732218142578,
+      "url": "{{ _.baseUrl }}{{ _.client }}/show/1/?all_sales=false&sales_year=2024&sales_month=11",
+      "name": "clientDetails (show)",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/10.1.1"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.authToken }}"
+      },
+      "metaSortKey": -1730229873504,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_f11a08a0ff364f9384bf7e32f4973d95",
+      "parentId": "fld_fd42b62db2a949d0bf9ff70948ac4e59",
+      "modified": 1732642472528,
+      "created": 1732218142579,
+      "url": "{{ _.baseUrl }}{{ _.client }}/store",
+      "name": "newClient (store)",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"CPF\":\"51015266142\",\n\t\"name\":\"Maria das Graças\",\n\t\"address\": {\n\t\t\t\"road\": \"Rua das Flores\",\n      \"number\": 123,\n      \"complement\": \"Apto 202\",\n      \"neighborhood\": \"Jardim Primavera\",\n      \"city\": \"São Paulo\",\n      \"zip_code\": \"62385-000\",\n      \"state\": \"São Paulo\",\n      \"country\": \"Brasil\"\n\t},\n\t\"phone\":{\n\t\t\"number\": \"(11) 2212-6129\"\n\t}\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/10.1.1"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.authToken }}"
+      },
+      "metaSortKey": -1729238192468.5,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_3922c29adb32454f817b64649e85e454",
+      "parentId": "fld_fd42b62db2a949d0bf9ff70948ac4e59",
+      "modified": 1732642736369,
+      "created": 1732218142583,
+      "url": "{{ _.baseUrl }}{{ _.client }}/update/1",
+      "name": "updateClient (update)",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "\t{\n\t\t\"phone\":{\n\t\t\t\"id\": 1,\n\t\t\t\"number\": \"(16) 3587-3905\"\n\t\t}\n\t}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/10.1.1"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.authToken }}"
+      },
+      "metaSortKey": -1728742351950.75,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_5f04cb504ee44d8084d16e3b61165337",
+      "parentId": "fld_fd42b62db2a949d0bf9ff70948ac4e59",
+      "modified": 1732643103730,
+      "created": 1732218142586,
+      "url": "{{ _.baseUrl }}{{ _.client }}/delete/1",
+      "name": "deleteClient (delete)",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/10.1.1"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.authToken }}"
+      },
+      "metaSortKey": -1728494431691.875,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_8ce4b9cb02944f9aae3570257837dc5c",
+      "parentId": "fld_1adf47c779534a4a992da7298521a2d3",
+      "modified": 1732222191242,
+      "created": 1732218376495,
+      "url": "{{ _.baseUrl }}{{ _.sale }}/",
+      "name": "getAll (index)",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/10.1.1"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.authToken }}"
+      },
+      "metaSortKey": -1732213235575,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_1adf47c779534a4a992da7298521a2d3",
+      "parentId": "wrk_eec9584ef7ce498b8a8d3190fe7c5713",
+      "modified": 1732406259060,
+      "created": 1732218376493,
+      "name": "sales",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1732213017254,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_02e3ca14c05340368092f99fd064bc3a",
+      "parentId": "fld_1adf47c779534a4a992da7298521a2d3",
+      "modified": 1732642551554,
+      "created": 1732218376496,
+      "url": "{{ _.baseUrl }}{{ _.sale }}/show/1",
+      "name": "saleDetails (show)",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/10.1.1"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.authToken }}"
+      },
+      "metaSortKey": -1730229873504,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_b3660cb18a62486898960357b539bc0b",
+      "parentId": "fld_1adf47c779534a4a992da7298521a2d3",
+      "modified": 1732642614128,
+      "created": 1732218376497,
+      "url": "{{ _.baseUrl }}{{ _.sale }}/store",
+      "name": "newSale (store)",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"client_id\":1,\n\t\"product_id\":1,\n\t\"quantity\":1,\n\t\"sale_date\": \"2024-10-26T14:34:39.000-03:00\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/10.1.1"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.authToken }}"
+      },
+      "metaSortKey": -1729238192468.5,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_864da595b96359a80c73b49dac1a1b3102f6620e",
+      "parentId": "wrk_eec9584ef7ce498b8a8d3190fe7c5713",
+      "modified": 1732642182447,
+      "created": 1732213006023,
+      "name": "Base Environment",
+      "data": {
+        "baseUrl": "http://localhost:3333",
+        "auth": "/auth",
+        "product": "/product",
+        "client": "/client",
+        "sale": "/sale",
+        "authToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJzZXNzaW9uX2lkIjoyLCJpYXQiOjE3MzI2NDIxODJ9.xp7CNixxhImhnKYEIbO1boh-eGE72FaN1jd54O3P4aI"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "baseUrl",
+          "auth",
+          "product",
+          "client",
+          "sale",
+          "authToken"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1732213006023,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_864da595b96359a80c73b49dac1a1b3102f6620e",
+      "parentId": "wrk_eec9584ef7ce498b8a8d3190fe7c5713",
+      "modified": 1732642182445,
+      "created": 1732213006025,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    }
+  ]
+}

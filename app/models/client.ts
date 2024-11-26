@@ -5,6 +5,8 @@ import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations';
 
 import User from '#models/user';
 import Sale from './sale.js';
+import Address from './address.js';
+import Phone from './phone.js';
 
 export default class Client extends BaseModel {
   @column({ isPrimary: true })
@@ -28,6 +30,12 @@ export default class Client extends BaseModel {
   @belongsTo(() => User, { foreignKey: 'user_id' })
   public user!: BelongsTo<typeof User>;
 
-  @hasMany(() => Sale, { foreignKey: 'user_id' })
+  @hasMany(() => Sale, { foreignKey: 'client_id' })
   public sales!: HasMany<typeof Sale>;
+
+  @hasMany(() => Address, { foreignKey: 'client_id' })
+  public address!: HasMany<typeof Address>;
+
+  @hasMany(() => Phone, { foreignKey: 'client_id' })
+  public phone!: HasMany<typeof Phone>;
 }

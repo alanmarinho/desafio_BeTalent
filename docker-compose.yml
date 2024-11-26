@@ -3,15 +3,15 @@ version: '3.8'
 services:
   mysql:
     image: mysql:8.0
-    container_name: desafio_BeTalent_db
+    container_name: desafio_betalent_alan_marinho_db
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: desafio_BeTalent
+      MYSQL_DATABASE: desafio_betalent_alan_marinho
       MYSQL_USER: user
       MYSQL_PASSWORD: pass
       MYSQL_ROOT_HOST: '%'
     ports:
-      - '127.0.0.1:3310:3306'
+      - '127.0.0.1:3390:3306'
     volumes:
       - ./db_data:/var/lib/mysql
     restart: always
