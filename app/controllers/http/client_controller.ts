@@ -394,7 +394,7 @@ export default class ClientController {
         updateClietReturn = {
           ...updateClietReturn,
           address: {
-            address,
+            ...address,
           },
         };
       }
